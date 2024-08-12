@@ -5,7 +5,10 @@
             <form [formGroup]="signUpForm" (ngSubmit)="createNewUser()">
                 <div class="mb-3">
                     <label for="firstName" class="form-label">First name</label>
-                    <input type="text" formControlName="firstName" class="form-control" id="firstName" />                                        
+                    <input type="text" 
+                           formControlName="firstName" 
+                           class="form-control" 
+                           id="firstName" />                                        
                     <div *ngIf="signUpForm.controls['firstName'].touched && !signUpForm.controls['firstName'].valid">
                             <span class="text-danger" *ngIf="signUpForm.controls['firstName'].hasError('required')" >
                                  First name is mandatory   
@@ -24,7 +27,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="lastName" class="form-label">Last name</label>
-                    <input type="text" formControlName="lastName" class="form-control" id="exampleInputPassword1" />
+                    
+                    <input type="text" 
+                           formControlName="lastName" 
+                           class="form-control" 
+                           id="lastName" />
+
                     <span *ngIf="signUpForm.controls['lastName'].touched && !signUpForm.controls['lastName'].valid">
                         <span class="text-danger" *ngIf="signUpForm.controls['lastName'].required">
                             Last name is required.
@@ -39,12 +47,18 @@
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="text" formControlName="email" class="form-control" id="exampleInputPassword1" />
+                    
+                    <input type="text" 
+                           formControlName="email" 
+                           [pattern]="emailRegex"
+                           class="form-control" 
+                           id="email" />
+                    
                     <span *ngIf="signUpForm.controls['email'].touched && signUpForm.controls['email'].invalid">
                         <span class="text-danger" *ngIf="signUpForm.controls['email'].hasError('required')">
                               Email is required.  
                         </span>
-                        <span class="text-danger" *ngIf="signUpForm.controls['email'].hasError('email')">
+                        <span class="text-danger" *ngIf="!signUpForm.controls['email'].hasError('required') && !validateEmailFormat()">
                               Invalid email format.  
                         </span>
                     </span>

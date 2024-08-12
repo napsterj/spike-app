@@ -13,20 +13,25 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 export class RegisterComponent implements OnInit{
  
   signUpForm:any
-  
-  constructor(private fb:FormBuilder){ }
+  emailRegex = /^[a-zA-Z0-9,_%+-]+@[a-zA-Z0-9,-]+\.[a-zA-Z]{2,4}$/
 
+  constructor(private fb:FormBuilder){ }
+      
   ngOnInit(): void {
       this.signUpForm = this.fb.group({
         firstName:['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])],        
         middleName:[''],
         lastName : ['',Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])],
-        email: ['', Validators.compose([Validators.required,Validators.email])]
+        email: ['', Validators.compose([Validators.required, Validators.email])]
       })
   }
 
   createNewUser() {
     console.log(this.signUpForm)    
+  }
+
+  validateEmailFormat() {
+    return this.emailRegex.test(this.signUpForm.email)
   }
 
 
