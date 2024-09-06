@@ -1,19 +1,29 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand">Spike</a>
-      <button class="navbar-toggler" routerLink="home" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" routerLink="/home" type="button" 
+              data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">      
-        <h5 class="justify-content-evenly">Welcome to Spike - Innovative Customer Management Tool</h5>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end align-content-end">          
-          <li class="nav-item">
+        Innovative Customer Management Tool
+        <div class="ps-3 text-primary  ms-5 ps-5">
+          {{username}}
+        </div>
+        <ul class="navbar-nav me-auto">          
+          <li class="nav-item" *ngIf="!isUserAuthentic">
             <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
           </li>                
-          <li class="nav-item">
+          <li class="nav-item display-none ms-5" *ngIf="isUserAuthentic">
+            <a class="nav-link bg-danger-subtle" style="cursor:pointer" (click)="logout()"  routerLinkActive="active">Logout</a>
+          </li>
+          <li class="nav-item ms-5" *ngIf="isUserAuthentic">
             <a class="nav-link" routerLink="/register" routerLinkActive="active">New User - Register</a>          
           </li>
-        </ul>      
+          <li class="nav-item" *ngIf="isUserAuthentic">
+            <a class="nav-link" routerLink="/show/users" routerLinkActive="active">Display Existing Users</a>          
+          </li>
+        </ul>           
       </div>
     </div>
   </nav>

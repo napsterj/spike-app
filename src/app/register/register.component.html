@@ -1,7 +1,8 @@
 <div class="container p-5">
     <div class="row">
         <div class="col-sm-12">
-            <h2 class="text-center">Sign Up</h2>
+            <span class="bg-info" *ngIf="Error != ''"><p class="text-danger">{{Error}}</p></span>
+            <h3 class="text-center">Sign Up</h3>
             <form [formGroup]="signUpForm" (ngSubmit)="createNewUser()">
                 <div class="mb-3">
                     <label for="firstName" class="form-label">First name</label>
@@ -34,13 +35,13 @@
                            id="lastName" />
 
                     <span *ngIf="signUpForm.controls['lastName'].touched && !signUpForm.controls['lastName'].valid">
-                        <span class="text-danger" *ngIf="signUpForm.controls['lastName'].required">
+                        <span class="text-danger" *ngIf="signUpForm.controls['lastName'].hasError('required')">
                             Last name is required.
                         </span>
                         <span class="text-danger" *ngIf="signUpForm.controls['lastName'].hasError('minlength')">
                             Last name must be minimum 3 characters.    
                         </span>                        
-                        <span class="text-danger" *ngIf="signUpForm.control['lastName'].hasError('maxlength')">
+                        <span class="text-danger" *ngIf="signUpForm.controls['lastName'].hasError('maxlength')">
                             Last name must be maximum 10 characters.
                         </span>
                     </span>
@@ -62,7 +63,7 @@
                               Invalid email format.  
                         </span>
                     </span>
-                </div>
+                </div>                              
                 <button type="submit" class="btn btn-primary" [disabled]="signUpForm.invalid">Submit</button>
             </form>
             <br>
@@ -71,4 +72,13 @@
             </p>
         </div>
     </div>
+</div>
+<div *ngIf="loadSpinner">
+    <ngx-spinner
+        bdColor="rgba(51,51,51,0.8)"
+        size="medium"
+        color="#fff"
+        type="ball-scale-multiple">
+     <p style="font-size: 20px; color: white">Logging in...</p>
+    </ngx-spinner>
 </div>
